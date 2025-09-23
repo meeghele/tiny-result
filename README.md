@@ -16,16 +16,43 @@ A minimal yet fully type-safe Result implementation for TypeScript. This library
 - **Composable**: Chain operations that return Results
 - **Utility Functions**: `tryCatch` and `fromPromise` for converting throwing code
 
+## Comparison with Other Libraries
+
+### Compared to [neverthrow](https://github.com/supermacro/neverthrow) 
+- ✅ Much smaller bundle size
+- ✅ Simpler API surface
+- ❌ No ResultAsync utilities
+- ❌ No combine/combineWithAllErrors
+
+### Compared to [ts-result](https://github.com/vultix/ts-results)
+- ✅ Smaller and more focused
+- ✅ Better TypeScript inference
+- ✅ Rust-inspired naming
+- ❌ Fewer utility methods
+
+### When to use tiny-result
+- Learning the Result pattern
+- Small projects where bundle size matters
+- When you only need basic Result functionality
+- As a starting point to build your own extensions
+- If you need to handle fewer edge cases
+- If you want more predictable inference
+
+### When to use larger libraries
+- Production applications with complex error handling
+- Heavy async operations (use neverthrow)
+- When you need Result.combine operations
+
 ## Install
 
 tiny-result is provided as an ESM-only package on GitHub Packages.
 
-### Install with with bun:
+### Install with with bun
 ```bash
 bun install @meeghele/tiny-result
 ```
 
-### Install with with npm:
+### Install with with npm
 
 First, configure npm to use GitHub Packages for the `@meeghele` scope:
 ```bash
@@ -190,33 +217,6 @@ bun run example:basic
 bun run example:advanced
 bun run example:metadata
 ```
-
-## Comparison with Other Libraries
-
-### Compared to [neverthrow](https://github.com/supermacro/neverthrow) 
-- ✅ Much smaller bundle size
-- ✅ Simpler API surface
-- ❌ No ResultAsync utilities
-- ❌ No combine/combineWithAllErrors
-
-### Compared to [ts-result](https://github.com/vultix/ts-results)
-- ✅ Smaller and more focused
-- ✅ Better TypeScript inference
-- ✅ Rust-inspired naming
-- ❌ Fewer utility methods
-
-### When to use tiny-result
-- Learning the Result pattern
-- Small projects where bundle size matters
-- When you only need basic Result functionality
-- As a starting point to build your own extensions
-- If you need to handle fewer edge cases
-- If you want more predictable inference
-
-### When to use larger libraries
-- Production applications with complex error handling
-- Heavy async operations (use neverthrow)
-- When you need Result.combine operations
 
 ## Development
 
