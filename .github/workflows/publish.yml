@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish:
-    if: startsWith(github.ref, 'refs/tags/v') && github.event.base_ref == 'refs/heads/main'
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     container: oven/bun:latest
     permissions:
@@ -17,6 +17,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install Node.js and npm
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y curl ca-certificates
+          curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
 
       - name: Extract version from tag
         id: get_version
