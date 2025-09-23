@@ -1,0 +1,37 @@
+name: tiny-result-ci
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feat/**
+      - chore/**
+      - fix/**
+  pull_request:
+    branches:
+      - main
+      - develop
+      - feat/**
+      - chore/**
+      - fix/**
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: oven/bun:latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install dependencies
+        run: bun install
+
+      - name: format check
+        run: bun run format:check
+
+      - name: test coverage
+        run: bun run test
+
+      - name: build
+        run: bun run build

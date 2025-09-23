@@ -1,0 +1,14 @@
+[test]
+# Test file patterns
+coverage = true
+coverage-dir = "coverage"
+coverage-threshold = 80
+
+# Coverage include/exclude patterns
+coverage-include = ["src/**/*.ts"]
+coverage-exclude = ["src/**/*.d.ts", "src/**/index.ts"]
+
+# Test patterns
+test-patterns = ["tests/**/*.test.ts"]
+
+# TypeScript support is built-in with Bun

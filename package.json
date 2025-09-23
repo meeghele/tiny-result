@@ -1,0 +1,71 @@
+{
+  "name": "@meeghele/tiny-result",
+  "description": "A minimal yet fully type-safe Result implementation for TypeScript",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun run clean && tsc -p tsconfig.build.json",
+    "dev": "tsc --watch",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "test:coverage": "bun test --coverage",
+    "clean": "rm -rf dist",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "example:basic": "bun run examples/basic.ts",
+    "example:advanced": "bun run examples/advanced.ts",
+    "example:metadata": "bun run examples/metadata.ts",
+    "docs:generate": "typedoc src/index.ts",
+    "format:check": "biome format ."
+  },
+  "keywords": [
+    "result",
+    "result-type",
+    "error-handling",
+    "typescript",
+    "either",
+    "functional-programming",
+    "type-safety",
+    "minimal",
+    "lightweight",
+    "rust-inspired"
+  ],
+  "author": "Michele Tavella <meeghele@proton.me>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meeghele/tiny-result"
+  },
+  "bugs": {
+    "url": "https://github.com/meeghele/tiny-result/issues"
+  },
+  "homepage": "https://github.com/meeghele/tiny-result#readme",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "latest",
+    "typedoc": "^0.27.6",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  }
+}
