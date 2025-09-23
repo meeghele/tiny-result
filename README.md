@@ -47,9 +47,17 @@ A minimal yet fully type-safe Result implementation for TypeScript. This library
 
 tiny-result is provided as an ESM-only package on GitHub Packages.
 
+
 ### Install with with bun
+
+First, configure bun to use GitHub Packages for the `@meeghele` scope:
 ```bash
-bun install @meeghele/tiny-result
+# Add to your .npmrc file in project root
+echo "@meeghele:registry=https://npm.pkg.github.com" >> .npmrc
+```
+
+```bash
+bun install github:@meeghele/tiny-result
 ```
 
 ### Install with with npm
@@ -60,9 +68,13 @@ First, configure npm to use GitHub Packages for the `@meeghele` scope:
 echo "@meeghele:registry=https://npm.pkg.github.com" >> .npmrc
 ```
 
-Then install:
 ```bash
 npm install @meeghele/tiny-result
+```
+
+### Install with with bun (repo)
+```bash
+bun install github:meeghele/tiny-result
 ```
 
 ### Alternative: copy source files
