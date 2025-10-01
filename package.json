@@ -1,5 +1,6 @@
 {
   "name": "@meeghele/tiny-result",
+  "version": "1.0.0",
   "description": "A minimal yet fully type-safe Result implementation for TypeScript",
   "type": "module",
   "main": "./dist/index.js",
@@ -31,7 +32,8 @@
     "example:advanced": "bun run examples/advanced.ts",
     "example:metadata": "bun run examples/metadata.ts",
     "docs:generate": "typedoc src/index.ts",
-    "format:check": "biome format ."
+    "format:check": "biome format .",
+    "prepublishOnly": "bun run build && bun test"
   },
   "keywords": [
     "result",
@@ -62,10 +64,7 @@
     "typescript": "^5.7.3"
   },
   "engines": {
+    "node": ">=18.0.0",
     "bun": ">=1.0.0"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "public"
   }
 }
