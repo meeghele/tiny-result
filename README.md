@@ -1,3 +1,4 @@
+[![npm version](https://img.shields.io/npm/v/@meeghele/tiny-result.svg)](https://www.npmjs.com/package/@meeghele/tiny-result)
 [![CI](https://github.com/meeghele/tiny-result/actions/workflows/ci.yml/badge.svg)](https://github.com/meeghele/tiny-result/actions)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
