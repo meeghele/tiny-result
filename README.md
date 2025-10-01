@@ -45,41 +45,25 @@ A minimal yet fully type-safe Result implementation for TypeScript. This library
 
 ## Install
 
-tiny-result is provided as an ESM-only package on GitHub Packages.
-
-
-### Install with with bun
-
-First, configure bun to use GitHub Packages for the `@meeghele` scope:
-```bash
-# Add to your .npmrc file in project root
-echo "@meeghele:registry=https://npm.pkg.github.com" >> .npmrc
-```
+tiny-result is provided as an ESM-only package.
 
 ```bash
-bun install github:@meeghele/tiny-result
-```
+# Using bun
+bun install @meeghele/tiny-result
 
-### Install with with npm
-
-First, configure npm to use GitHub Packages for the `@meeghele` scope:
-```bash
-# Add to your .npmrc file in project root
-echo "@meeghele:registry=https://npm.pkg.github.com" >> .npmrc
-```
-
-```bash
+# Using npm
 npm install @meeghele/tiny-result
-```
 
-### Install with with bun (repo)
-```bash
-bun install github:meeghele/tiny-result
+# Using pnpm
+pnpm add @meeghele/tiny-result
+
+# Using yarn
+yarn add @meeghele/tiny-result
 ```
 
 ### Alternative: copy source files
 
-If you are using CJS and/or do not want to use GitHub Packages, just copy [`src/core.ts`](https://github.com/meeghele/tiny-result/blob/main/src/core.ts) and [`src/index.ts`](https://github.com/meeghele/tiny-result/blob/main/src/index.ts) to your project.
+Just copy [`src/core.ts`](https://github.com/meeghele/tiny-result/blob/main/src/core.ts), [`src/utility.ts`](https://github.com/meeghele/tiny-result/blob/main/src/utility.ts), and [`src/index.ts`](https://github.com/meeghele/tiny-result/blob/main/src/index.ts) to your project.
 
 ## Quick Start
 
