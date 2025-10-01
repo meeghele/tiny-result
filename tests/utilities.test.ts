@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE file for details.
 
 import { describe, expect, it } from 'bun:test'
-import { err, fromPromise, ok, tryCatch } from '../src/index.js'
+import { all, err, fromPromise, ok, partition, tryCatch } from '../src/index.js'
 
 describe('Utility Functions', () => {
   describe('tryCatch', () => {
@@ -196,6 +196,106 @@ describe('Utility Functions', () => {
       expect(result.isErr()).toBe(true)
       if (result.isErr()) {
         expect(result.error).toBe('Operation timed out: Timeout')
+      }
+    })
+  })
+
+  describe('all', () => {
+    it('should return ok with all values when all results are ok', () => {
+      const results = [ok(1), ok(2), ok(3)]
+      const result = all(results)
+
+      expect(result.isOk()).toBe(true)
+      if (result.isOk()) {
+        expect(result.value).toEqual([1, 2, 3])
+      }
+    })
+
+    it('should return the first error when any result is err', () => {
+      const results = [ok(1), err('error1'), ok(3), err('error2')]
+      const result = all(results)
+
+      expect(result.isErr()).toBe(true)
+      if (result.isErr()) {
+        expect(result.error).toBe('error1')
+      }
+    })
+
+    it('should handle empty array', () => {
+      const results = []
+      const result = all(results)
+
+      expect(result.isOk()).toBe(true)
+      if (result.isOk()) {
+        expect(result.value).toEqual([])
+      }
+    })
+
+    it('should handle single ok result', () => {
+      const results = [ok(42)]
+      const result = all(results)
+
+      expect(result.isOk()).toBe(true)
+      if (result.isOk()) {
+        expect(result.value).toEqual([42])
+      }
+    })
+
+    it('should handle single err result', () => {
+      const results = [err('failure')]
+      const result = all(results)
+
+      expect(result.isErr()).toBe(true)
+      if (result.isErr()) {
+        expect(result.error).toBe('failure')
+      }
+    })
+
+    it('should work with different value types', () => {
+      const results = [ok('hello'), ok('world')]
+      const result = all(results)
+
+      expect(result.isOk()).toBe(true)
+      if (result.isOk()) {
+        expect(result.value).toEqual(['hello', 'world'])
+      }
+    })
+
+    it('should preserve order of values', () => {
+      const results = [ok(3), ok(1), ok(4), ok(1), ok(5)]
+      const result = all(results)
+
+      expect(result.isOk()).toBe(true)
+      if (result.isOk()) {
+        expect(result.value).toEqual([3, 1, 4, 1, 5])
+      }
+    })
+
+    it('should work with complex types', () => {
+      interface User {
+        id: number
+        name: string
+      }
+
+      const results = [ok({ id: 1, name: 'Alice' }), ok({ id: 2, name: 'Bob' })]
+      const result = all(results)
+
+      expect(result.isOk()).toBe(true)
+      if (result.isOk()) {
+        expect(result.value).toEqual([
+          { id: 1, name: 'Alice' },
+          { id: 2, name: 'Bob' },
+        ])
+      }
+    })
+
+    it('should short-circuit on first error', () => {
+      const results = [ok(1), err('first error'), ok(3)]
+      const result = all(results)
+
+      expect(result.isErr()).toBe(true)
+      if (result.isErr()) {
+        expect(result.error).toBe('first error')
       }
     })
   })
