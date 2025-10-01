@@ -54,3 +54,7 @@ examples:
 .PHONY: ci
 ci:
 	act
+
+.PHONY: publish
+publish:
+	npm publish  --access public
