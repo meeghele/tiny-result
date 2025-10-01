@@ -300,6 +300,93 @@ describe('Utility Functions', () => {
     })
   })
 
+  describe('partition', () => {
+    it('should separate ok and err results', () => {
+      const results = [ok(1), err('error1'), ok(2), err('error2'), ok(3)]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([1, 2, 3])
+      expect(errs).toEqual(['error1', 'error2'])
+    })
+
+    it('should handle all ok results', () => {
+      const results = [ok(1), ok(2), ok(3)]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([1, 2, 3])
+      expect(errs).toEqual([])
+    })
+
+    it('should handle all err results', () => {
+      const results = [err('error1'), err('error2'), err('error3')]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([])
+      expect(errs).toEqual(['error1', 'error2', 'error3'])
+    })
+
+    it('should handle empty array', () => {
+      const results = []
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([])
+      expect(errs).toEqual([])
+    })
+
+    it('should handle single ok result', () => {
+      const results = [ok(42)]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([42])
+      expect(errs).toEqual([])
+    })
+
+    it('should handle single err result', () => {
+      const results = [err('failure')]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([])
+      expect(errs).toEqual(['failure'])
+    })
+
+    it('should preserve order of values', () => {
+      const results = [ok(3), err('a'), ok(1), err('b'), ok(4), ok(1), err('c'), ok(5)]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([3, 1, 4, 1, 5])
+      expect(errs).toEqual(['a', 'b', 'c'])
+    })
+
+    it('should work with complex types', () => {
+      interface User {
+        id: number
+        name: string
+      }
+
+      const results = [
+        ok({ id: 1, name: 'Alice' }),
+        err('User not found'),
+        ok({ id: 2, name: 'Bob' }),
+        err('Invalid user'),
+      ]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual([
+        { id: 1, name: 'Alice' },
+        { id: 2, name: 'Bob' },
+      ])
+      expect(errs).toEqual(['User not found', 'Invalid user'])
+    })
+
+    it('should work with different value and error types', () => {
+      const results = [ok('hello'), err(404), ok('world'), err(500)]
+      const { oks, errs } = partition(results)
+
+      expect(oks).toEqual(['hello', 'world'])
+      expect(errs).toEqual([404, 500])
+    })
+  })
+
   describe('Integration tests', () => {
     it('should combine tryCatch and fromPromise', async () => {
       const processData = async (
