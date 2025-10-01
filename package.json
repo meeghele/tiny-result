@@ -1,6 +1,6 @@
 {
   "name": "@meeghele/tiny-result",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A minimal yet fully type-safe Result implementation for TypeScript",
   "type": "module",
   "main": "./dist/index.js",
