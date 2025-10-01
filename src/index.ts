@@ -3,4 +3,5 @@
 
 // Re-export everything from core
 export type { Result } from './core.js'
-export { Ok, Err, ok, err, isOk, isErr, tryCatch, fromPromise } from './core.js'
+export { Ok, Err, ok, err, isOk, isErr } from './core.js'
+export { tryCatch, fromPromise } from './utility.js'

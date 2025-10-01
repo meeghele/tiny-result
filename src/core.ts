@@ -107,26 +107,3 @@ export const err = <E>(error: E): Err<E> => new Err(error)
 // Type guards
 export const isOk = <T, E>(result: Result<T, E>): result is Ok<T> => result.ok
 export const isErr = <T, E>(result: Result<T, E>): result is Err<E> => result.err
-
-// Utility functions
-export const tryCatch = <T, E = unknown>(
-  fn: () => T,
-  mapError?: (error: unknown) => E,
-): Result<T, E> => {
-  try {
-    return ok(fn())
-  } catch (error) {
-    return err(mapError ? mapError(error) : (error as E))
-  }
-}
-
-export const fromPromise = async <T, E = unknown>(
-  promise: Promise<T>,
-  mapError?: (error: unknown) => E,
-): Promise<Result<T, E>> => {
-  try {
-    return ok(await promise)
-  } catch (error) {
-    return err(mapError ? mapError(error) : (error as E))
-  }
-}
