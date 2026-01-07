@@ -57,4 +57,4 @@ ci:
 
 .PHONY: publish
 publish:
-	npm publish  --access public
+	bun publish --access public

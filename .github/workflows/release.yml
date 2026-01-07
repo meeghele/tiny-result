@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    container: oven/bun:latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install make
+        run: apt-get update && apt-get install -y make
+
+      - name: install dependencies
+        run: make install
+
+      - name: format check
+        run: make format-check
+
+      - name: test
+        run: make test
+
+      - name: build
+        run: make build
+
+      - name: setup npm auth
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: publish to npm
+        run: bun publish --access public
